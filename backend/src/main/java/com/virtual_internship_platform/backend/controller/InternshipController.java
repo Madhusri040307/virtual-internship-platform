@@ -4,6 +4,7 @@ import com.virtual_internship_platform.backend.entity.Internship;
 import com.virtual_internship_platform.backend.response.ApiResponse;
 import com.virtual_internship_platform.backend.service.InternshipService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +46,24 @@ public class InternshipController {
                 new ApiResponse<>(
                         true,
                         "Internships retrieved successfully",
+                        internships
+                )
+        );
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<Page<Internship>>> searchInternships(
+            @RequestParam(defaultValue = "") String title,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+
+        Page<Internship> internships =
+                internshipService.searchInternships(title, page, size);
+
+        return ResponseEntity.ok(
+                new ApiResponse<>(
+                        true,
+                        "Internships searched successfully",
                         internships
                 )
         );
