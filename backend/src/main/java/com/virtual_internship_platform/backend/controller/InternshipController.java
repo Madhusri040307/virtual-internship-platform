@@ -2,6 +2,7 @@ package com.virtual_internship_platform.backend.controller;
 
 import com.virtual_internship_platform.backend.entity.Internship;
 import com.virtual_internship_platform.backend.service.InternshipService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,8 @@ public class InternshipController {
 
     @PostMapping
     public ResponseEntity<Internship> createInternship(
-            @RequestBody Internship internship) {
+            @Valid @RequestBody Internship internship) {
+
         return ResponseEntity.ok(
                 internshipService.createInternship(internship)
         );
@@ -35,6 +37,7 @@ public class InternshipController {
     @GetMapping("/{id}")
     public ResponseEntity<Internship> getInternshipById(
             @PathVariable Long id) {
+
         return ResponseEntity.ok(
                 internshipService.getInternshipById(id)
         );
@@ -43,7 +46,8 @@ public class InternshipController {
     @PutMapping("/{id}")
     public ResponseEntity<Internship> updateInternship(
             @PathVariable Long id,
-            @RequestBody Internship internship) {
+            @Valid @RequestBody Internship internship) {
+
         return ResponseEntity.ok(
                 internshipService.updateInternship(id, internship)
         );
@@ -52,7 +56,11 @@ public class InternshipController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteInternship(
             @PathVariable Long id) {
+
         internshipService.deleteInternship(id);
-        return ResponseEntity.ok("Internship deleted successfully");
+
+        return ResponseEntity.ok(
+                "Internship deleted successfully"
+        );
     }
 }

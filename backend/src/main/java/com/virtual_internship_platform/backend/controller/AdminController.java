@@ -3,6 +3,7 @@ package com.virtual_internship_platform.backend.controller;
 import com.virtual_internship_platform.backend.entity.Admin;
 import com.virtual_internship_platform.backend.security.JwtService;
 import com.virtual_internship_platform.backend.service.AdminService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,9 @@ public class AdminController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Admin> createAdmin(@RequestBody Admin admin) {
+    public ResponseEntity<Admin> createAdmin(
+            @Valid @RequestBody Admin admin) {
+
         return ResponseEntity.ok(
                 adminService.createAdmin(admin)
         );

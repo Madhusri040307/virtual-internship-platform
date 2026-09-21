@@ -1,6 +1,7 @@
 package com.virtual_internship_platform.backend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "internships")
@@ -10,21 +11,26 @@ public class Internship {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Title is required")
     private String title;
 
+    @NotBlank(message = "Company is required")
     private String company;
 
+    @NotBlank(message = "Location is required")
     private String location;
 
+    @NotBlank(message = "Description is required")
     private String description;
 
+    @NotBlank(message = "Duration is required")
     private String duration;
 
     public Internship() {
     }
 
     public Internship(String title, String company, String location,
-                      String description, String duration) {
+                       String description, String duration) {
         this.title = title;
         this.company = company;
         this.location = location;

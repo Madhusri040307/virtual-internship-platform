@@ -3,6 +3,7 @@ package com.virtual_internship_platform.backend.controller;
 import com.virtual_internship_platform.backend.entity.Student;
 import com.virtual_internship_platform.backend.security.JwtService;
 import com.virtual_internship_platform.backend.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,12 @@ public class StudentController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Student> registerStudent(@RequestBody Student student) {
-        return ResponseEntity.ok(studentService.registerStudent(student));
+    public ResponseEntity<Student> registerStudent(
+            @Valid @RequestBody Student student) {
+
+        return ResponseEntity.ok(
+                studentService.registerStudent(student)
+        );
     }
 
     @PostMapping("/login")
