@@ -1,6 +1,7 @@
 package com.virtual_internship_platform.backend.controller;
 
 import com.virtual_internship_platform.backend.entity.Internship;
+import com.virtual_internship_platform.backend.response.ApiResponse;
 import com.virtual_internship_platform.backend.service.InternshipService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -19,48 +20,81 @@ public class InternshipController {
     }
 
     @PostMapping
-    public ResponseEntity<Internship> createInternship(
+    public ResponseEntity<ApiResponse<Internship>> createInternship(
             @Valid @RequestBody Internship internship) {
 
+        Internship savedInternship =
+                internshipService.createInternship(internship);
+
         return ResponseEntity.ok(
-                internshipService.createInternship(internship)
+                new ApiResponse<>(
+                        true,
+                        "Internship created successfully",
+                        savedInternship
+                )
         );
     }
 
     @GetMapping
-    public ResponseEntity<List<Internship>> getAllInternships() {
+    public ResponseEntity<ApiResponse<List<Internship>>> getAllInternships() {
+
+        List<Internship> internships =
+                internshipService.getAllInternships();
+
         return ResponseEntity.ok(
-                internshipService.getAllInternships()
+                new ApiResponse<>(
+                        true,
+                        "Internships retrieved successfully",
+                        internships
+                )
         );
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Internship> getInternshipById(
+    public ResponseEntity<ApiResponse<Internship>> getInternshipById(
             @PathVariable Long id) {
 
+        Internship internship =
+                internshipService.getInternshipById(id);
+
         return ResponseEntity.ok(
-                internshipService.getInternshipById(id)
+                new ApiResponse<>(
+                        true,
+                        "Internship retrieved successfully",
+                        internship
+                )
         );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Internship> updateInternship(
+    public ResponseEntity<ApiResponse<Internship>> updateInternship(
             @PathVariable Long id,
             @Valid @RequestBody Internship internship) {
 
+        Internship updatedInternship =
+                internshipService.updateInternship(id, internship);
+
         return ResponseEntity.ok(
-                internshipService.updateInternship(id, internship)
+                new ApiResponse<>(
+                        true,
+                        "Internship updated successfully",
+                        updatedInternship
+                )
         );
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteInternship(
+    public ResponseEntity<ApiResponse<String>> deleteInternship(
             @PathVariable Long id) {
 
         internshipService.deleteInternship(id);
 
         return ResponseEntity.ok(
-                "Internship deleted successfully"
+                new ApiResponse<>(
+                        true,
+                        "Internship deleted successfully",
+                        null
+                )
         );
     }
 }

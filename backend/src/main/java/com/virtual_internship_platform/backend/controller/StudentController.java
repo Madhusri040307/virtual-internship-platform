@@ -1,6 +1,7 @@
 package com.virtual_internship_platform.backend.controller;
 
 import com.virtual_internship_platform.backend.entity.Student;
+import com.virtual_internship_platform.backend.response.ApiResponse;
 import com.virtual_internship_platform.backend.security.JwtService;
 import com.virtual_internship_platform.backend.service.StudentService;
 import jakarta.validation.Valid;
@@ -21,16 +22,22 @@ public class StudentController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Student> registerStudent(
+    public ResponseEntity<ApiResponse<Student>> registerStudent(
             @Valid @RequestBody Student student) {
 
+        Student savedStudent = studentService.registerStudent(student);
+
         return ResponseEntity.ok(
-                studentService.registerStudent(student)
+                new ApiResponse<>(
+                        true,
+                        "Student registered successfully",
+                        savedStudent
+                )
         );
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> loginStudent(
+    public ResponseEntity<ApiResponse<LoginResponse>> loginStudent(
             @RequestBody LoginRequest loginRequest) {
 
         Student student = studentService.loginStudent(
@@ -40,12 +47,18 @@ public class StudentController {
 
         String token = jwtService.generateToken(student.getEmail());
 
+        LoginResponse loginResponse = new LoginResponse(
+                student.getId(),
+                student.getName(),
+                student.getEmail(),
+                token
+        );
+
         return ResponseEntity.ok(
-                new LoginResponse(
-                        student.getId(),
-                        student.getName(),
-                        student.getEmail(),
-                        token
+                new ApiResponse<>(
+                        true,
+                        "Student login successful",
+                        loginResponse
                 )
         );
     }

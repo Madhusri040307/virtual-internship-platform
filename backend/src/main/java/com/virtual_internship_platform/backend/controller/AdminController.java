@@ -1,6 +1,7 @@
 package com.virtual_internship_platform.backend.controller;
 
 import com.virtual_internship_platform.backend.entity.Admin;
+import com.virtual_internship_platform.backend.response.ApiResponse;
 import com.virtual_internship_platform.backend.security.JwtService;
 import com.virtual_internship_platform.backend.service.AdminService;
 import jakarta.validation.Valid;
@@ -21,16 +22,22 @@ public class AdminController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Admin> createAdmin(
+    public ResponseEntity<ApiResponse<Admin>> createAdmin(
             @Valid @RequestBody Admin admin) {
 
+        Admin savedAdmin = adminService.createAdmin(admin);
+
         return ResponseEntity.ok(
-                adminService.createAdmin(admin)
+                new ApiResponse<>(
+                        true,
+                        "Admin created successfully",
+                        savedAdmin
+                )
         );
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> loginAdmin(
+    public ResponseEntity<ApiResponse<LoginResponse>> loginAdmin(
             @RequestBody LoginRequest loginRequest) {
 
         Admin admin = adminService.loginAdmin(
@@ -40,11 +47,17 @@ public class AdminController {
 
         String token = jwtService.generateToken(admin.getEmail());
 
+        LoginResponse loginResponse = new LoginResponse(
+                admin.getId(),
+                admin.getEmail(),
+                token
+        );
+
         return ResponseEntity.ok(
-                new LoginResponse(
-                        admin.getId(),
-                        admin.getEmail(),
-                        token
+                new ApiResponse<>(
+                        true,
+                        "Admin login successful",
+                        loginResponse
                 )
         );
     }

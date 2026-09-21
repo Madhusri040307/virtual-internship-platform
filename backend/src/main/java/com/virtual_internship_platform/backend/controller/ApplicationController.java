@@ -1,6 +1,7 @@
 package com.virtual_internship_platform.backend.controller;
 
 import com.virtual_internship_platform.backend.entity.Application;
+import com.virtual_internship_platform.backend.response.ApiResponse;
 import com.virtual_internship_platform.backend.service.ApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,39 +19,67 @@ public class ApplicationController {
     }
 
     @PostMapping
-    public ResponseEntity<Application> applyForInternship(
+    public ResponseEntity<ApiResponse<Application>> applyForInternship(
             @RequestBody Application application) {
 
+        Application savedApplication =
+                applicationService.applyForInternship(application);
+
         return ResponseEntity.ok(
-                applicationService.applyForInternship(application)
+                new ApiResponse<>(
+                        true,
+                        "Application submitted successfully",
+                        savedApplication
+                )
         );
     }
 
     @GetMapping("/student/{studentId}")
-    public ResponseEntity<List<Application>> getStudentApplications(
+    public ResponseEntity<ApiResponse<List<Application>>> getStudentApplications(
             @PathVariable Long studentId) {
 
+        List<Application> applications =
+                applicationService.getApplicationsByStudent(studentId);
+
         return ResponseEntity.ok(
-                applicationService.getApplicationsByStudent(studentId)
+                new ApiResponse<>(
+                        true,
+                        "Student applications retrieved successfully",
+                        applications
+                )
         );
     }
 
     @GetMapping("/internship/{internshipId}")
-    public ResponseEntity<List<Application>> getInternshipApplications(
+    public ResponseEntity<ApiResponse<List<Application>>> getInternshipApplications(
             @PathVariable Long internshipId) {
 
+        List<Application> applications =
+                applicationService.getApplicationsByInternship(internshipId);
+
         return ResponseEntity.ok(
-                applicationService.getApplicationsByInternship(internshipId)
+                new ApiResponse<>(
+                        true,
+                        "Internship applications retrieved successfully",
+                        applications
+                )
         );
     }
 
     @PutMapping("/{id}/status")
-    public ResponseEntity<Application> updateApplicationStatus(
+    public ResponseEntity<ApiResponse<Application>> updateApplicationStatus(
             @PathVariable Long id,
             @RequestParam String status) {
 
+        Application updatedApplication =
+                applicationService.updateApplicationStatus(id, status);
+
         return ResponseEntity.ok(
-                applicationService.updateApplicationStatus(id, status)
+                new ApiResponse<>(
+                        true,
+                        "Application status updated successfully",
+                        updatedApplication
+                )
         );
     }
 }
