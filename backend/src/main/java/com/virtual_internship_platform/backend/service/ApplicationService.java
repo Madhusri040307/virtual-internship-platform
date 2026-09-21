@@ -21,7 +21,9 @@ public class ApplicationService {
                 application.getStudentId(),
                 application.getInternshipId())) {
 
-            throw new RuntimeException("Student already applied for this internship");
+            throw new RuntimeException(
+                    "Student already applied for this internship"
+            );
         }
 
         application.setStatus("APPLIED");
@@ -39,8 +41,18 @@ public class ApplicationService {
 
     public Application updateApplicationStatus(Long id, String status) {
 
+        if (!status.equals("APPLIED")
+                && !status.equals("ACCEPTED")
+                && !status.equals("REJECTED")) {
+
+            throw new RuntimeException(
+                    "Invalid application status. Use APPLIED, ACCEPTED or REJECTED"
+            );
+        }
+
         Application application = applicationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Application not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("Application not found"));
 
         application.setStatus(status);
 
