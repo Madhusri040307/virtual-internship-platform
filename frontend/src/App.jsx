@@ -1,309 +1,224 @@
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Register from "./Register";
+import Login from "./Login";
+import Internships from "./Internships";
 import "./App.css";
 
-function App() {
+function Home() {
   return (
-    <div className="app">
-
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="logo">
-          <div className="logo-icon">VI</div>
-          <div>
-            <h2>VirtualIntern</h2>
-            <span>Student Career Platform</span>
-          </div>
-        </div>
-
-        <div className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#internships">Internships</a>
-          <a href="#features">Features</a>
-          <a href="#about">About</a>
-        </div>
-
-        <div className="nav-actions">
-          <button className="login-btn">Student Login</button>
-          <button className="register-btn">Register</button>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="hero" id="home">
+    <>
+      <section className="hero">
         <div className="hero-content">
-
-          <div className="badge">
-            ✦ Built for Students • Learn • Apply • Grow
-          </div>
+          <span className="hero-badge">🎓 Student Career Platform</span>
 
           <h1>
             Start Your
-            <span> Virtual Internship </span>
-            Journey
+            <span> Virtual Internship Journey</span>
           </h1>
 
           <p>
-            Discover meaningful internship opportunities, build practical
-            skills, and take the next step toward your career — all from one
-            student-friendly platform.
+            Discover internship opportunities, apply easily, and build
+            real-world skills through our student-focused virtual internship
+            platform.
           </p>
 
           <div className="hero-buttons">
-            <button className="primary-btn">
-              Explore Internships →
-            </button>
+            <Link to="/internships" className="primary-btn">
+              Explore Internships
+            </Link>
 
-            <button className="secondary-btn">
-              Create Student Account
-            </button>
-          </div>
-
-          <div className="hero-stats">
-            <div>
-              <strong>100+</strong>
-              <span>Internships</span>
-            </div>
-
-            <div>
-              <strong>500+</strong>
-              <span>Students</span>
-            </div>
-
-            <div>
-              <strong>50+</strong>
-              <span>Companies</span>
-            </div>
+            <Link to="/register" className="secondary-btn">
+              Register Now
+            </Link>
           </div>
         </div>
 
-        <div className="hero-card-area">
-          <div className="floating-card card-one">
-            <span className="mini-icon">✓</span>
-            <div>
-              <strong>Application Status</strong>
-              <p>Application Accepted</p>
-            </div>
+        <div className="hero-card">
+          <div className="dashboard-header">
+            <span>Student Dashboard</span>
+            <span className="status-dot">●</span>
           </div>
 
-          <div className="main-dashboard-card">
-            <div className="dashboard-top">
-              <div>
-                <span>Student Dashboard</span>
-                <h3>Find your opportunity</h3>
-              </div>
-              <div className="profile-circle">M</div>
-            </div>
-
-            <div className="search-box">
-              🔍 <span>Search internships...</span>
-            </div>
-
-            <div className="internship-preview">
-              <div className="company-logo">A</div>
-              <div className="preview-info">
-                <strong>Java Backend Intern</strong>
-                <span>ABC Technologies • Chennai</span>
-              </div>
-              <span className="apply-label">Apply</span>
-            </div>
-
-            <div className="internship-preview">
-              <div className="company-logo purple">R</div>
-              <div className="preview-info">
-                <strong>React Developer Intern</strong>
-                <span>Rapid Solutions • Remote</span>
-              </div>
-              <span className="apply-label">Apply</span>
-            </div>
+          <div className="dashboard-item">
+            <span>Java Backend Intern</span>
+            <strong>Applied</strong>
           </div>
 
-          <div className="floating-card card-two">
-            <span className="mini-icon star">★</span>
-            <div>
-              <strong>Career Growth</strong>
-              <p>Build real-world skills</p>
-            </div>
+          <div className="dashboard-item">
+            <span>React Developer Intern</span>
+            <strong>Open</strong>
+          </div>
+
+          <div className="dashboard-item">
+            <span>Data Analyst Intern</span>
+            <strong>Open</strong>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="features-section" id="features">
+      <section className="stats">
+        <div>
+          <h2>100+</h2>
+          <p>Internship Opportunities</p>
+        </div>
+
+        <div>
+          <h2>500+</h2>
+          <p>Student Applications</p>
+        </div>
+
+        <div>
+          <h2>50+</h2>
+          <p>Partner Companies</p>
+        </div>
+      </section>
+
+      <section className="features">
         <div className="section-heading">
-          <span>WHY VIRTUAL INTERN</span>
-          <h2>Everything students need to get started</h2>
+          <span>PLATFORM FEATURES</span>
+          <h2>Everything Students Need</h2>
           <p>
-            A simple platform designed to connect students with relevant
-            internship opportunities.
+            A simple platform designed to help students discover and manage
+            their virtual internship journey.
           </p>
         </div>
 
-        <div className="features-grid">
-
+        <div className="feature-grid">
           <div className="feature-card">
-            <div className="feature-icon blue">🔎</div>
+            <div className="feature-icon">🔍</div>
             <h3>Find Internships</h3>
             <p>
-              Search and explore internships based on your interests,
-              skills and career goals.
+              Search and explore internship opportunities based on your
+              interests and skills.
             </p>
           </div>
 
           <div className="feature-card">
-            <div className="feature-icon green">⚡</div>
+            <div className="feature-icon">📝</div>
             <h3>Easy Applications</h3>
             <p>
-              Apply to internships through a simple and student-friendly
-              application process.
+              Apply for suitable internships through a simple online process.
             </p>
           </div>
 
           <div className="feature-card">
-            <div className="feature-icon orange">📊</div>
+            <div className="feature-icon">📊</div>
             <h3>Track Applications</h3>
             <p>
-              Monitor your applications and easily view whether they are
-              applied, accepted or rejected.
+              Monitor your internship applications and their current status.
             </p>
           </div>
 
           <div className="feature-card">
-            <div className="feature-icon purple">🔐</div>
+            <div className="feature-icon">🔐</div>
             <h3>Secure Platform</h3>
             <p>
-              Student and administrator accounts are protected with secure
-              authentication.
+              Student accounts are protected using authentication and secure
+              backend services.
             </p>
           </div>
-
         </div>
       </section>
 
-      {/* Internships */}
-      <section className="internships-section" id="internships">
-
+      <section className="internship-section">
         <div className="section-heading">
           <span>OPPORTUNITIES</span>
-          <h2>Explore popular internships</h2>
-          <p>
-            Start building practical experience with opportunities designed
-            for students.
-          </p>
+          <h2>Explore Internship Roles</h2>
         </div>
 
         <div className="internship-grid">
-
           <div className="internship-card">
-            <div className="card-header">
-              <div className="company-logo large">A</div>
-              <span className="remote-tag">Remote</span>
-            </div>
-
+            <span className="role-tag">Backend</span>
             <h3>Java Backend Intern</h3>
-            <p className="company-name">ABC Technologies</p>
-
-            <div className="job-details">
-              <span>📍 Chennai</span>
-              <span>⏱ 3 Months</span>
-            </div>
-
-            <button>View Internship →</button>
+            <p>Develop REST APIs using Java and Spring Boot.</p>
+            <Link to="/internships">View Internship →</Link>
           </div>
 
           <div className="internship-card">
-            <div className="card-header">
-              <div className="company-logo large purple">R</div>
-              <span className="remote-tag">Remote</span>
-            </div>
-
+            <span className="role-tag">Frontend</span>
             <h3>React Developer Intern</h3>
-            <p className="company-name">Rapid Solutions</p>
-
-            <div className="job-details">
-              <span>📍 Bangalore</span>
-              <span>⏱ 3 Months</span>
-            </div>
-
-            <button>View Internship →</button>
+            <p>Build modern and responsive web applications using React.</p>
+            <Link to="/internships">View Internship →</Link>
           </div>
 
           <div className="internship-card">
-            <div className="card-header">
-              <div className="company-logo large green">D</div>
-              <span className="onsite-tag">On-site</span>
-            </div>
-
+            <span className="role-tag">Data</span>
             <h3>Data Analyst Intern</h3>
-            <p className="company-name">DataWorks</p>
+            <p>Work with data analysis and business insights.</p>
+            <Link to="/internships">View Internship →</Link>
+          </div>
+        </div>
+      </section>
 
-            <div className="job-details">
-              <span>📍 Coimbatore</span>
-              <span>⏱ 6 Months</span>
-            </div>
+      <section className="cta">
+        <h2>Turn Your Learning Into Real-World Experience</h2>
+        <p>
+          Join the Virtual Internship Platform and take the next step in your
+          career journey.
+        </p>
 
-            <button>View Internship →</button>
+        <Link to="/register" className="primary-btn">
+          Get Started
+        </Link>
+      </section>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="app">
+        <nav className="navbar">
+          <Link to="/" className="logo">
+            VirtualIntern
+          </Link>
+
+          <div className="nav-links">
+            <Link to="/">Home</Link>
+            <Link to="/internships">Internships</Link>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
           </div>
 
-        </div>
-      </section>
+          <div className="nav-actions">
+            <Link to="/login" className="login-link">
+              Student Login
+            </Link>
 
-      {/* About / CTA */}
-      <section className="cta-section" id="about">
-        <div>
-          <span>YOUR CAREER STARTS HERE</span>
-          <h2>Turn your learning into real-world experience.</h2>
-          <p>
-            Create your student profile, discover opportunities and take
-            your first step toward professional growth.
-          </p>
-        </div>
+            <Link to="/register" className="register-btn">
+              Register
+            </Link>
+          </div>
+        </nav>
 
-        <button className="cta-button">
-          Get Started →
-        </button>
-      </section>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/internships" element={<Internships />} />
+        </Routes>
 
-      {/* Footer */}
-      <footer>
-        <div className="footer-main">
-
-          <div className="footer-brand">
-            <div className="logo">
-              <div className="logo-icon">VI</div>
-              <div>
-                <h2>VirtualIntern</h2>
-                <span>Student Career Platform</span>
-              </div>
-            </div>
-
+        <footer className="footer">
+          <div>
+            <h3>VirtualIntern</h3>
             <p>
-              A virtual internship platform created to help students
-              discover opportunities and build practical experience.
+              Virtual Internship Platform for Students
             </p>
           </div>
 
-          <div className="footer-column">
-            <h4>Platform</h4>
-            <a href="#internships">Internships</a>
-            <a href="#features">Features</a>
-            <a href="#home">Student Login</a>
+          <div>
+            <p>Information Technology</p>
+            <p>JJCET-Trichy</p>
           </div>
 
-          <div className="footer-column">
-            <h4>Project</h4>
-            <a href="#about">About</a>
-            <a href="#features">How It Works</a>
-            <a href="#home">Contact</a>
+          <div>
+            <p>© 2026 Madhu Sri K</p>
+            <p>Academic Project</p>
           </div>
-
-        </div>
-
-        <div className="footer-bottom">
-          <span>© 2026 Virtual Internship Platform for Students</span>
-          <span>JJCET-Trichy • Information Technology</span>
-        </div>
-      </footer>
-
-    </div>
+        </footer>
+      </div>
+    </BrowserRouter>
   );
 }
 
